@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>artempro</title>
+</head>
+<body>
+    <img src="https://i.pinimg.com/736x/6d/68/58/6d68581c72d8b01952005c98836f2f23.jpg">
+
+    <script>
+    const users = [
+      { id: 1, name: "Anna", age: 22, city: "Moscow", isActive: true },
+      { id: 2, name: "Oleg", age: 17, city: "Kazan", isActive: false },
+      { id: 3, name: "Ivan", age: 30, city: "Moscow", isActive: true },
+      { id: 4, name: "Maria", age: 25, city: "Sochi", isActive: false }
+    ];
+
+//Номер1
+    function getActiveUsers(usersArray) {
+      return usersArray.filter(user => user.isActive);
+    }
+
+// 2
+    const getUserNames = (usersArray) => {
+      return usersArray.map(user => user.name);
+    };
+
+// 3
+    function findUserById(usersArray, id) {
+      return usersArray.find(user => user.id === id) || null;
+    }
+
+// 4
+    function getUsersStatistics(usersArray) {
+      return usersArray.reduce((stats, user) => {
+        stats.total += 1;
+        user.isActive ? stats.active++ : stats.inactive++;
+        return stats;
+      }, { total: 0, active: 0, inactive: 0 });
+    }
+//  пять
+    function getAverageAge(usersArray) {
+      const totalAge = usersArray.reduce((sum, user) => sum + user.age, 0);
+      return totalAge / usersArray.length;
+    }
+//6
+    function groupUsersByCity(usersArray) {
+      return usersArray.reduce((groups, user) => {
+        if (!groups[user.city]) {
+          groups[user.city] = [];
+        }
+        groups[user.city].push(user);
+        return groups;
+      }, {});
+    }
+    console.log("Активные пользователи:", getActiveUsers(users));
+    console.log("Имена пользователей:", getUserNames(users));
+    console.log("Пользователь с id = 3:", findUserById(users, 3));
+    console.log("Статистика пользователей:", getUsersStatistics(users));
+    console.log("Средний возраст:", getAverageAge(users));
+    console.log("Пользователи по городам:", groupUsersByCity(users));
+    </script>
+</body>
+</html>
